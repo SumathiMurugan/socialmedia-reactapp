@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        .register {
+            height: 100vh;
+            background-color: rgb(193, 190, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register .card {
+            width: 50%;
+            display: flex;
+            flex-direction: row-reverse;
+            background-color: white;
+            border-radius: 10px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .register .card .left {
+            flex: 1;
+            background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+                url("https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/05/life-lessons-from-graduation-speeches.jpeg")
+                    center;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            color: white;
+        }
+
+        .register .card .left h1 {
+            font-size: 80px;
+            line-height: 100px;
+        }
+
+        .register .card .left span {
+            font-size: 14px;
+        }
+
+        .register .card .left button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            color: rebeccapurple;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .register .card .right {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            justify-content: center;
+            color: #555;
+        }
+
+        .register .card .right form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .register .card .right form input {
+            border: none;
+            border-bottom: 1px solid lightgray;
+            padding: 20px 10px;
+        }
+
+        .register .card .right form button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background-color: #938eef;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="register">
+        <div class="card">
+            <div class="left">
+                <h1>CamPus Life</h1>
+                <span>"Welcome to the vibrant atmosphere of KCET Campus Life! 
+                  Let's delve into the myriad experiences that college life offers and revel in the joy it brings. 
+                  Let's also expand our circle and make new friends together!"</span>
+                <button>Discover More</button>
+            </div>
+            <div class="right">
+                <h1>Register</h1>
+                <form action="/register" method="post">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="/">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

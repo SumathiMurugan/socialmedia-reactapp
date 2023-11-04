@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        .login {
+            height: 100vh;
+            background-color: rgb(193, 190, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card {
+            width: 50%;
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        
+        .left {
+            flex: 1;
+            background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+                url("https://hips.hearstapps.com/hmg-prod/images/graduation-day-royalty-free-image-1647266748.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=1200:*")
+                    center;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            color: white;
+        }
+        
+        .left h1 {
+            font-size: 80px;
+            line-height: 100px;
+        }
+        
+        .left span {
+            font-size: 14px;
+        }
+        
+        .left button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            color: rebeccapurple;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .right {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            justify-content: center;
+            color: #555;
+        }
+        
+        .right form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .right form input {
+            border: none;
+            border-bottom: 1px solid lightgray;
+            padding: 20px 10px;
+        }
+        
+        .right form button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background-color: #938eef;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <div class="card">
+            <div class="left">
+                <h1>KCET Campus</h1>
+                <span>"Welcome to the vibrant atmosphere of KCET Campus Life! 
+                    Let's delve into the myriad experiences that college life offers and revel in the joy it brings. 
+                    Let's also expand our circle and make new friends together!"</span>
+                <button>Discover More</button>
+            </div>
+            <div class="right">
+                <h1>Login</h1>
+                <form action="/login" method="post">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function login() {
+        const username = document.getElementById('usernameInput').value;
+        localStorage.setItem('username', username);
+        window.location.href = 'home.html'; // Redirect to Home page after login
+    }
+</script>
+
+</body>
+</html>

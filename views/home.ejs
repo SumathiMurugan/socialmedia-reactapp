@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Media App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CSS -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+       <h1><i class="fa-brands fa-kickstarter"></i>cet <i class="fa-brands fa-twitter"></i></h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="navbar-icons">
+            <i class="fas fa-home"></i>
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-envelope"></i> 
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-moon"></i> 
+        </div>
+    </nav> 
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-links">
+                <ul>
+                    <li><a href="#"><i class="fas fa-images"></i>Images</a></li>
+                    <li><a href="#"><i class="fas fa-video"></i>Videos</a></li>
+                    <li><a href="#"><i class="fas fa-user-friends"></i>Friends</a></li>
+                    <li><a href="#"><i class="fas fa-comment"></i>Chat</a></li>
+                    <li><a href="#"><i class="fas fa-comment-alt"></i>Messages</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i>Groups</a></li>
+                    <li><a href="#"><i class="fas fa-bookmark"></i>Saved</a></li>
+                    <li><a href="#"><i class="fa-solid fa-heart"></i>Like</a></li>
+                    <li><a href="#"><i class="fa-solid fa-comments"></i>Command</a></li>
+                </ul>
+            </div>
+        </div>
+        <main class="main-content">
+            <form class="post-form" id="postForm">
+                <input type="text" placeholder="Enter your post description">
+                <input type="file" accept="image/*" id="imageInput"> <!-- For image upload -->
+                <button type="submit" onclick="handlePost()">Post</button>
+            </form>
+
+            <div class="posts" id="postsContainer">
+                <!-- Uploaded images with usernames will be displayed here -->
+            </div>
+        </main>
+
+            
+            
+
+    </div>
+<style>
+    /* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply some basic styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #ddd;
+    padding: 20px;
+}
+
+.main-content {
+    flex: 3;
+    padding: 20px;
+}
+
+.post-form {
+    margin-bottom: 20px;
+}
+
+.post-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post-form input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.post {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: white;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.sidebar {
+    flex: 1;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile h2, .profile p {
+    text-align: center;
+}
+
+
+
+.navbar {
+    background-color: #938eef;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 5px;
+}
+
+.navbar-icons i {
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.navbar-icons i:hover {
+    color:rgb(53, 44, 96) /* Change color on hover */
+}
+.sidebar {
+            flex:0.5;
+            background-color:#938eef;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 40px;
+            
+        }
+
+        .sidebar-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-links a:hover {
+           background-color: rgb(5, 5, 22);
+           padding: 20px;
+        }
+
+        .sidebar-links i {
+            margin-right: 10px;
+        }
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            const description = document.querySelector('.post-form input[type="text"]').value;
+            const imageInput = document.getElementById('imageInput').files[0];
+            const username = localStorage.getItem('username'); // Retrieve username from login
+
+            const reader = new FileReader();
+            reader.onload = function() {
+                const image = document.createElement('img');
+                image.src = reader.result;
+                image.style.width = '200px'; // Set image width
+
+                const post = document.createElement('div');
+                post.classList.add('post');
+
+                const userInfo = document.createElement('p');
+                userInfo.innerText = `Posted by: ${username} - ${getCurrentDateTime()}`; // Display the username and date
+                post.appendChild(userInfo);
+
+                const postDescription = document.createElement('p');
+                postDescription.innerText = description;
+                post.appendChild(postDescription);
+
+                post.appendChild(image);
+
+                const likeButton = document.createElement('button');
+                likeButton.innerText = 'Like';
+                likeButton.addEventListener('click', likePost);
+                post.appendChild(likeButton);
+
+                const commentButton = document.createElement('button');
+                commentButton.innerText = 'Comment';
+                commentButton.addEventListener('click', commentPost);
+                post.appendChild(commentButton);
+
+                const postsContainer = document.getElementById('postsContainer');
+                postsContainer.appendChild(post);
+            }
+            reader.readAsDataURL(imageInput);
+        });
+    });
+
+    function getCurrentDateTime() {
+        const currentDateTime = new Date();
+        return currentDateTime.toLocaleString();
+    }
+
+    function likePost() {
+        // Functionality for liking a post
+        console.log('Post Liked!');
+    }
+
+    function commentPost() {
+        // Functionality for commenting on a post
+        console.log('Comment Added!');
+    }
+</script>
+
+</body>
+</html>
